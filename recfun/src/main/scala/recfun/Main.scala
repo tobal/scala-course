@@ -27,7 +27,26 @@ object Main {
    * Exercise 2
    */
     def balance(chars: List[Char]): Boolean = {
-        def func(chars: List[Char], deviance: Int): Boolean = ???
+        def func(chars: List[Char], deviance: Int): Boolean = {
+            if(chars.isEmpty)
+                if(deviance == 0)
+                    return true
+                else
+                    return false
+            if(chars.head == '(')
+                func(chars.tail, deviance + 1)
+            else
+                if(chars.head == ')')
+                {
+                    if(deviance == 0)
+                        return false
+                    func(chars.tail, deviance - 1)
+                }
+                else
+                    func(chars.tail, deviance)
+        }
+        func(chars, 0)
+    }
   
   /**
    * Exercise 3
