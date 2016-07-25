@@ -72,5 +72,12 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("forall") {
+    new TestSets {
+      val s12 = union(s1, s2)
+      assert(forall(s12, (x: Int) => x % 1 == 0), "Forall 1")
+      assert(!forall(s12, (x: Int) => x % 2 == 0), "Forall 2")
+    }
+  }
 
 }
