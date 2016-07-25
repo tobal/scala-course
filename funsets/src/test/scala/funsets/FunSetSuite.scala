@@ -54,5 +54,14 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("diff contains the difference of two given sets") {
+    new TestSets {
+      val s12 = union(s1, s2)
+      val diff_s = diff(s12, s2)
+      assert(contains(diff_s, 1), "Diff 1")
+      assert(!contains(diff_s, 2), "Diff 2")
+    }
+  }
+
 
 }
