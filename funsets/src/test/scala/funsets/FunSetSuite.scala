@@ -63,5 +63,14 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("filter can filter by lambda") {
+    new TestSets {
+      val s12 = union(s1, s2)
+      val filtered = filter(s12, (x: Int) => x == 2)
+      assert(!contains(filtered, 1), "Diff 1")
+      assert(contains(filtered, 2), "Diff 2")
+    }
+  }
+
 
 }
