@@ -19,6 +19,7 @@ class FunSetSuite extends FunSuite {
     val s1 = singletonSet(1)
     val s2 = singletonSet(2)
     val s3 = singletonSet(3)
+    val s12 = union(s1, s2)
   }
 
   test("singletonSet(1) contains 1") {
@@ -44,7 +45,6 @@ class FunSetSuite extends FunSuite {
 
   test("intersect contains common elements of each set") {
     new TestSets {
-      val s12 = union(s1, s2)
       val int_s1 = intersect(s1, s12)
       val int_s2 = intersect(s2, s12)
       assert(contains(int_s1, 1), "Intersect 1")
@@ -56,7 +56,6 @@ class FunSetSuite extends FunSuite {
 
   test("diff contains the difference of two given sets") {
     new TestSets {
-      val s12 = union(s1, s2)
       val diff_s = diff(s12, s2)
       assert(contains(diff_s, 1), "Diff 1")
       assert(!contains(diff_s, 2), "Diff 2")
@@ -65,7 +64,6 @@ class FunSetSuite extends FunSuite {
 
   test("filter can filter by lambda") {
     new TestSets {
-      val s12 = union(s1, s2)
       val filtered = filter(s12, (x: Int) => x == 2)
       assert(!contains(filtered, 1), "Diff 1")
       assert(contains(filtered, 2), "Diff 2")
@@ -74,7 +72,6 @@ class FunSetSuite extends FunSuite {
 
   test("forall") {
     new TestSets {
-      val s12 = union(s1, s2)
       assert(forall(s12, (x: Int) => x % 1 == 0), "Forall 1")
       assert(!forall(s12, (x: Int) => x % 2 == 0), "Forall 2")
     }
@@ -82,7 +79,6 @@ class FunSetSuite extends FunSuite {
 
   test("exists") {
     new TestSets {
-      val s12 = union(s1, s2)
       assert(exists(s12, (x: Int) => x % 2 == 0), "Exists 1")
       assert(!exists(s12, (x: Int) => x % 3 == 0), "Exists 2")
     }
