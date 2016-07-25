@@ -80,4 +80,12 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("exists") {
+    new TestSets {
+      val s12 = union(s1, s2)
+      assert(exists(s12, (x: Int) => x % 2 == 0), "Exists 1")
+      assert(!exists(s12, (x: Int) => x % 3 == 0), "Exists 2")
+    }
+  }
+
 }
