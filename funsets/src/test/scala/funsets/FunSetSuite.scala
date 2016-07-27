@@ -84,4 +84,13 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("map") {
+    new TestSets {
+      val doubled = map(s12, (x: Int) => x * 2)
+      assert(contains(doubled, 1), "Map 1")
+      assert(!contains(doubled, 2), "Map 2")
+      assert(contains(doubled, 4), "Map 3")
+    }
+  }
+
 }
