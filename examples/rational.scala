@@ -15,6 +15,6 @@ class Rational(x: Int, y: Int) {
 
     def + (that: Rational) =
         new Rational(
-            numer * that.denom + that.numer * denom
+            numer * that.denom + that.numer * denom,
             denom * that.denom)
 }
