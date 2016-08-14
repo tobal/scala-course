@@ -2,7 +2,7 @@
 import math.Ordering
 
 object mergesort {
-    def msort[T](xs: List[T])(ord: Ordering[T]): List[T] = {
+    def msort[T](xs: List[T])(implicit ord: Ordering[T]): List[T] = {
         val n = xs.length / 2
         if (n == 0) xs
         else {
@@ -15,7 +15,7 @@ object mergesort {
             }
 
             val (fst, snd) = xs splitAt n
-            merge(msort(fst)(ord), msort(snd)(ord))
+            merge(msort(fst), msort(snd))
         }
     }
 }
@@ -23,5 +23,5 @@ object mergesort {
 val nums = List(2, -4, , 7, 1)
 val fruits = List("apple", "pineapple", "orange", "banana")
 
-msort(nums)Ordering.Int)
-msort(fruits)(Ordering.String)
+msort(nums)
+msort(fruits)
