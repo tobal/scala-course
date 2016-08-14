@@ -23,22 +23,24 @@ class Sum(e1: Expr, e2: Expr) extends Expr {
     def rightOp: Expr = e2
 }
 
-def eval(e: Expr): Int = {
-    if (e.isNumber) e.numValue
-    else if (e.isSum) eval(e.leftOp) + eval(e.rightOp)
-    else throw new Error("Unknown expression " + e)
+object eval {
+    def eval(e: Expr): Int = {
+        if (e.isNumber) e.numValue
+        else if (e.isSum) eval(e.leftOp) + eval(e.rightOp)
+        else throw new Error("Unknown expression " + e)
+    }
 }
 
 // Better solution
 
-trait Expr {
+trait Expr2 {
     def eval: Int
 }
 
-class Number(n: Int) extends Expr {
+class Number2(n: Int) extends Expr {
     def eval: Int = n
 }
 
-class Sum(e1: Expr, e2: Expr) extends Expr {
+class Sum2(e1: Expr, e2: Expr) extends Expr {
     def eval: Int = e1.eval + e2.eval
 }
