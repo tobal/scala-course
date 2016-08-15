@@ -53,7 +53,7 @@ class HuffmanSuite extends FunSuite {
 
   test("until") {
     val leaflist = List(Leaf('e', 1), Leaf('t', 2), Leaf('x', 4))
-    assert(until(singleton, combine)(leaflist) === Fork(Fork(Leaf('e',1), Leaf('t',2), List('e', 't'),3),Leaf('x',4), List('e', 't', 'x'),7))
+    assert(until(singleton, combine)(leaflist) === List(Fork(Fork(Leaf('e',1), Leaf('t',2), List('e', 't'),3),Leaf('x',4), List('e', 't', 'x'),7)))
   }
 
   test("decode and encode a very short text should be identity") {
