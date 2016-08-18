@@ -82,7 +82,7 @@ object Anagrams {
    *  in the example above could have been displayed in some other order.
    */
     def combinations(occurrences: Occurrences): List[Occurrences] = occurrences match {
-        case List() => List()
+        case List() => List(List())
         case head :: tail => {
             val tailCombinations = combinations(tail)
             tailCombinations ++ (
@@ -153,5 +153,17 @@ object Anagrams {
    *
    *  Note: There is only one anagram of an empty sentence.
    */
-  def sentenceAnagrams(sentence: Sentence): List[Sentence] = ???
+    def sentenceAnagrams(sentence: Sentence): List[Sentence] = {
+        def sentenceAnagrams(occurrences: Occurrences): List[Sentence] = {
+            if (occurrences.isEmpty) List(List())
+            else {
+                for {
+                    occurencesCombination <- combinations(occurrences)
+                    word <- dictionaryByOccurrences(occurencesCombination)
+                    rest <- sentenceAnagrams(subtract(occurrences, occurencesCombination))
+                } yield word :: rest
+            }
+        }
+        sentenceAnagrams(sentenceOccurrences(sentence))
+    }
 }
