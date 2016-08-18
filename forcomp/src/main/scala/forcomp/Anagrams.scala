@@ -104,7 +104,14 @@ object Anagrams {
    *  Note: the resulting value is an occurrence - meaning it is sorted
    *  and has no zero-entries.
    */
-  def subtract(x: Occurrences, y: Occurrences): Occurrences = ???
+    def subtract(x: Occurrences, y: Occurrences): Occurrences =
+        x.foldLeft(List[(Char, Int)]())((a: List[(Char, Int)], b: (Char, Int)) => {
+            y.filter(_._1 == b._1) match {
+                case List() => a :+ b
+                case (head, b._2) :: xs => a
+                case head :: xs => a :+ (head._1, b._2 - head._2)
+            }
+        })
 
   /** Returns a list of all anagram sentences of the given sentence.
    *
