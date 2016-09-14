@@ -38,5 +38,5 @@ object Lists {
    * @return The largest element in `xs`
    * @throws java.util.NoSuchElementException if `xs` is an empty list
    */
-    def max(xs: List[Int]): Int = ???
+    def max(xs: List[Int]): Int = xs.foldLeft(0)((a, b) => if (a > b) a else b)
   }
