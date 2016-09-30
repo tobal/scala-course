@@ -36,19 +36,12 @@ class Pouring(capacity: Vector[Int]) {
 
     // Paths
 
-    class Path(history: List[Move]) {
-        // original implementation
-        //    def endState: State = trackState(history)
-        //    private def trachState(xs: List[Move]): State = xs match {
-        //        case Nil => initialState
-        //        case move :: xs1 => move change trackState(xs1)
-        //    }
-        def endState: State = (history foldRight initialState) (_ change _)
-        def extend(move: Move) = new Path(move :: history)
+    class Path(history: List[Move], val endState: State) {
+        def extend(move: Move) = new Path(move :: history, move change endState)
         override def toString = (history.reverse mkString " ") + "--> " + endState
     }
 
-    val initialPath = new Path(Nil)
+    val initialPath = new Path(Nil, initialState)
 
     def from(paths: Set[Path], explored: Set[State]): Stream[Set[Path]] =
         if (paths.isEmpty) Stream.empty
