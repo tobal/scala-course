@@ -50,17 +50,18 @@ class Pouring(capacity: Vector[Int]) {
 
     val initialPath = new Path(Nil)
 
-    def from(paths: Set[Path]): Stream[Set[Path]] =
+    def from(paths: Set[Path], explored: Set[State]): Stream[Set[Path]] =
         if (paths.isEmpty) Stream.empty
         else {
             val more = for {
                 path <- paths
                 next <- moves map path.extend
+                if !(explored contains next.endState)
             } yield next
-            paths #:: from(more)
+            paths #:: from(more, explored ++ (more map (_.endState)))
         }
 
-    val pathSets = from(Set(initialPath))
+    val pathSets = from(Set(initialPath), Set(initialState))
 
     def solution(target: Int): Stream[Path] =
         for {
