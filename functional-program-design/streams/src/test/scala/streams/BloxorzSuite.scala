@@ -64,6 +64,23 @@ class BloxorzSuite extends FunSuite {
         }
     }
 
+    test("newNeighborsOnly") {
+        new Level1 {
+            val filtered = newNeighborsOnly(
+                Set(
+                    (Block(Pos(1,2),Pos(1,3)), List(Right,Left,Up)),
+                    (Block(Pos(2,1),Pos(3,1)), List(Down,Left,Up))
+                ).toStream,
+
+                Set(Block(Pos(1,2),Pos(1,3)), Block(Pos(1,1),Pos(1,1)))
+            )
+            val expected = Set(
+                (Block(Pos(2,1),Pos(3,1)), List(Down,Left,Up))
+            ).toStream
+            assert(filtered == expected)
+        }
+    }
+
 	test("findChar level 1") {
     new Level1 {
       assert(startPos == Pos(1,1))
