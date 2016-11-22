@@ -13,3 +13,11 @@ class Wire {
     a()
   }
 }
+
+def inverter(input: Wire, output: Wire): Unit = {
+  def invertAction(): Unit = {
+    val inputSig = input.getSignal
+    afterDelay(InverterDelay) { output setSignel !inputSig }
+  }
+  input addAction invertAction
+}
