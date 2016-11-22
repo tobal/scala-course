@@ -41,3 +41,10 @@ def orGate(in1: Wire, in2: Wire, output: Wire): Unit = {
   in1 addAction orAction
   in2 addAction orAction
 }
+
+def probe(name: String, wire: Wire): Unit = {
+  def probeAction(): Unit = {
+    println(s"$name $currentTime value = ${wire.getSignal}")
+  }
+  wire addAction probeAction
+}
