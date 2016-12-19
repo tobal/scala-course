@@ -53,4 +53,8 @@ abstract class QuickCheckHeap extends Properties("Heap") with IntHeap {
 
     sorted(h)
   }
+
+  property("meld1") = forAll { (h1: H, h2: H) =>
+    findMin(meld(h1, h2)) == min(findMin(h1), findMin(h2))
+  }
 }
