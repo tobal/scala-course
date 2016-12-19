@@ -6,7 +6,7 @@ import org.scalacheck._
 import Arbitrary._
 import Gen._
 import Prop._
-import Math.min
+import Math.{min, max}
 
 abstract class QuickCheckHeap extends Properties("Heap") with IntHeap {
 
@@ -35,5 +35,10 @@ abstract class QuickCheckHeap extends Properties("Heap") with IntHeap {
   property("del1") = forAll { a: Int =>
     val h = insert(a, empty)
     deleteMin(h) == empty
+  }
+
+  property("del2") = forAll { (a: Int, b: Int) =>
+    val h = deleteMin(insert(a, insert(b, empty)))
+    findMin(h) == max(a, b)
   }
 }
