@@ -41,4 +41,16 @@ abstract class QuickCheckHeap extends Properties("Heap") with IntHeap {
     val h = deleteMin(insert(a, insert(b, empty)))
     findMin(h) == max(a, b)
   }
+
+  property("sort1") = forAll { h: H =>
+    def sorted(h: H): Boolean =
+      if (isEmpty(h)) true
+      else {
+        val m = findMin(h)
+        val h2 = deleteMin(h)
+        isEmpty(h2) || (m <= findMin(h2) && sorted(h2))
+      }
+
+    sorted(h)
+  }
 }
