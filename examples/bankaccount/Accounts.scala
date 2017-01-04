@@ -9,4 +9,11 @@ object accounts {
   c()
   a deposit 20
   c()
+  b deposit 30
+  c()
+  val xchange = Signal(246.0)
+  val inDollar = Signal(c() * xchange())
+  inDollar()
+  b withdraw 10
+  inDollar()
 }
