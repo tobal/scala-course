@@ -1,7 +1,5 @@
 package calculator
 
-import Math.sqrt
-
 object Polynomial {
   def computeDelta(a: Signal[Double], b: Signal[Double],
       c: Signal[Double]): Signal[Double] = {
@@ -11,11 +9,17 @@ object Polynomial {
 
   def computeSolutions(a: Signal[Double], b: Signal[Double],
       c: Signal[Double], delta: Signal[Double]): Signal[Set[Double]] = {
-    val square = sqrt(computeDelta(a, b, c)())
-    val _a = a()
-    val _b = b()
-    val first = (-_b + square) / (2 * _a)
-    val second = (-_b - square) / (2 * _a)
-    Signal(Set(first, second))
+    Signal {
+      var result = Set[Double]()
+
+      if (delta() > 0) {
+        result += (-b() + math.sqrt(delta())) / (2 * a())
+        result += (-b() - math.sqrt(delta())) / (2 * a())
+      }
+      else if (delta() == 0)
+        result += (-b()) / (2 * a())
+
+      result
+    }
   }
 }
