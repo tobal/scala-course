@@ -1,0 +1,3 @@
+package dojo
+
+object Store {}
